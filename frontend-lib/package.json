@@ -1,0 +1,16 @@
+{
+  "name": "frontend-lib",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/SecureBridge.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "keywords": [],
+  "author": "",
+  "devDependencies": {
+    "@types/node": "^25.0.9",
+    "typescript": "^5.9.3"
+  }
+}
