@@ -2,14 +2,15 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# Copy requirements from current directory (backend/) to /app
+# Cài đặt dependencies
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy everything
+# Copy toàn bộ code vào /app
 COPY . .
 
-WORKDIR /app/backend
+# Đảm bảo Python tìm thấy các module trong thư mục hiện tại
+ENV PYTHONPATH=/app
 
-# Run from inside backend
+# Chạy app (Sử dụng lệnh linh hoạt)
 CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]
