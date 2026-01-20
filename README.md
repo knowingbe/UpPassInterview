@@ -32,7 +32,19 @@ pip install -r requirements.txt
 python main.py
 ```
 
----
+### 3. Interactive Demo
+1. Build the library: `cd frontend-lib && npm install && npm run build`
+2. Start the backend: `cd backend && py -m pip install -r requirements.txt && py main.py`
+3. Run the demo: `cd demo && npm install && npm run dev`
+4. Open the URL shown in the terminal (usually `http://localhost:5173`).
+
+## Deployment
+
+For this assignment, I recommend the following:
+- **Frontend**: Deploy the `demo/` folder and `frontend-lib/` to **Netlify** or **Vercel**.
+- **Backend**: Deploy the `backend/` folder to **Render**, **Railway**, or **Fly.io** using the provided `Dockerfile`.
+
+Detailed instructions are in [DEPLOY.md](./DEPLOY.md).
 
 ## Part 3: System Design & Incident Response
 

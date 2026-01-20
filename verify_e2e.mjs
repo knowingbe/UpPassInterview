@@ -50,7 +50,7 @@ async function main() {
     // Start backend in background using uvicorn
     // use 'npx uvicorn' or assuming 'uvicorn' is in path (it was installed via pip)
     // We use 'python -m uvicorn' to be safe with path
-    const backend = spawn('python', ['-m', 'uvicorn', 'backend.main:app', '--host', '127.0.0.1', '--port', '8000'], {
+    const backend = spawn('py', ['-m', 'uvicorn', 'backend.main:app', '--host', '127.0.0.1', '--port', '8000'], {
         cwd: process.cwd(),
         env: { ...process.env, PYTHONUNBUFFERED: "1" }
     });

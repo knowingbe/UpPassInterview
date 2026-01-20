@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UpPass Secure Bridge Demo</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+            --success: #22c55e;
+            --error: #ef4444;
+            --border: rgba(255, 255, 255, 0.1);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: var(--card-bg);
+            padding: 40px;
+            border-radius: 24px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        p.subtitle {
+            color: var(--text-dim);
+            margin-bottom: 32px;
+            font-size: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: var(--text-dim);
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 16px;
+            background: rgba(15, 23, 42, 0.5);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.2s;
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.2);
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: var(--primary);
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        button:hover {
+            background: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        button:active {
+            transform: translateY(0);
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .results {
+            margin-top: 32px;
+            display: none;
+            animation: fadeIn 0.4s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .result-block {
+            background: rgba(15, 23, 42, 0.8);
+            padding: 20px;
+            border-radius: 16px;
+            margin-bottom: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .result-block h3 {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-dim);
+            margin-bottom: 8px;
+        }
+
+        .result-block pre {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8125rem;
+            white-space: pre-wrap;
+            word-break: break-all;
+            color: #818cf8;
+        }
+
+        .status {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 24px;
+            font-size: 0.875rem;
+        }
+
+        .status .dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--text-dim);
+        }
+
+        .status.connected .dot {
+            background: var(--success);
+            box-shadow: 0 0 8px var(--success);
+        }
+
+        .status.error .dot {
+            background: var(--error);
+        }
+
+        .loading-spinner {
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>UpPass Secure Bridge</h1>
+        <p class="subtitle">End-to-End Encrypted PII Submission</p>
+
+        <div class="form-group">
+            <label for="nationalId">National ID (Sensitive Data)</label>
+            <input type="text" id="nationalId" placeholder="e.g. 123-456-7890" value="ID-999-001">
+        </div>
+
+        <button id="submitBtn">
+            <span>Encrypt & Submit</span>
+        </button>
+
+        <div id="status" class="status">
+            <div class="dot"></div>
+            <span id="statusText">Checking backend connection...</span>
+        </div>
+
+        <div id="results" class="results">
+            <div class="result-block">
+                <h3>Package to be sent</h3>
+                <pre id="packageOutput"></pre>
+            </div>
+            <div class="result-block">
+                <h3>Server Response</h3>
+                <pre id="responseOutput"></pre>
+            </div>
+        </div>
+    </div>
+
+    <script type="module">
+        import { SecureBridge } from 'frontend-lib';
+
+        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+        let bridge = null;
+
+        const statusLabel = document.getElementById('status');
+        const statusText = document.getElementById('statusText');
+        const submitBtn = document.getElementById('submitBtn');
+        const resultsArea = document.getElementById('results');
+        const packageOutput = document.getElementById('packageOutput');
+        const responseOutput = document.getElementById('responseOutput');
+
+        async function init() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/public-key`);
+                if (!response.ok) throw new Error('Could not fetch public key');
+
+                const { public_key } = await response.json();
+                bridge = new SecureBridge(public_key);
+                await bridge.init();
+
+                statusLabel.classList.add('connected');
+                statusText.innerText = 'Connected, Bridge Secure';
+            } catch (err) {
+                statusLabel.classList.add('error');
+                statusText.innerText = 'Backend disconnected (Run backend first!)';
+                submitBtn.disabled = true;
+            }
+        }
+
+        submitBtn.onclick = async () => {
+            const data = document.getElementById('nationalId').value;
+            if (!data) return;
+
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<div class="loading-spinner"></div> Processing...';
+
+            try {
+                // 1. Encrypt using the library
+                const pkg = await bridge.encrypt(data);
+                packageOutput.innerText = JSON.stringify(pkg, null, 2);
+                resultsArea.style.display = 'block';
+
+                // 2. Submit to backend
+                const response = await fetch(`${BACKEND_URL}/submit`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(pkg)
+                });
+
+                const result = await response.json();
+                responseOutput.innerText = JSON.stringify(result, null, 2);
+
+                if (response.ok) {
+                    responseOutput.style.color = '#22c55e';
+                } else {
+                    responseOutput.style.color = '#ef4444';
+                }
+
+            } catch (err) {
+                responseOutput.innerText = 'Error: ' + err.message;
+                responseOutput.style.color = '#ef4444';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = 'Encrypt & Submit';
+            }
+        };
+
+        init();
+    </script>
+</body>
+
+</html>
