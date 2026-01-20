@@ -1,7 +1,7 @@
 from fastapi import APIRouter, HTTPException
-from ..schemas import SubmissionPayload, SearchQuery
-from ..services import crypto
-from .. import database, config
+from schemas import SubmissionPayload, SearchQuery
+from services import crypto
+import database, config
 
 router = APIRouter()
 

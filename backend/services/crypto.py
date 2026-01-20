@@ -6,8 +6,8 @@ from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.asymmetric import padding
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 
-from ..config import SERVER_PRIVATE_KEY, SEARCH_INDEX_SECRET, STORAGE_CIPHER
-from ..schemas import SubmissionPayload
+from config import SERVER_PRIVATE_KEY, SEARCH_INDEX_SECRET, STORAGE_CIPHER
+from schemas import SubmissionPayload
 
 def decrypt_ingress_payload(payload: SubmissionPayload) -> str:
     """

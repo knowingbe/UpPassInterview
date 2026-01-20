@@ -6,12 +6,10 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the entire backend directory content into /app/backend
-# We assume the build context is the 'backend' folder, so we copy '.' to 'backend/'
-# creating a package structure inside the container.
-COPY . backend/
+# Copy everything
+COPY . .
 
-ENV PYTHONPATH=/app
+WORKDIR /app/backend
 
-# Run as a module
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
+# Run from inside backend
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

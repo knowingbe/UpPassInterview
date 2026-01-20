@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from .routers import api
+from routers import api
 
 app = FastAPI(title="UpPass Verify Service")
 
