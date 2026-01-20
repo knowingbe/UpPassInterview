@@ -5,7 +5,7 @@
   "type": "module",
   "main": "dist/SecureBridge.js",
   "scripts": {
-    "build": "tsc"
+    "build": "npx tsc"
   },
   "keywords": [],
   "author": "",
