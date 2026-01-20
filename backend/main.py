@@ -6,8 +6,7 @@ app = FastAPI(title="UpPass Verify Service")
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # In production, replace with specific domains
-    allow_credentials=True,
+    allow_origins=["*"],
     allow_methods=["*"],
     allow_headers=["*"],
 )
