@@ -244,7 +244,11 @@
     <script type="module">
         import { SecureBridge } from 'frontend-lib';
 
-        const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+        let BACKEND_URL = import.meta.env.VITE_BACKEND_URL || 'http://127.0.0.1:8000';
+        // Remove trailing slash if present
+        if (BACKEND_URL.endsWith('/')) {
+            BACKEND_URL = BACKEND_URL.slice(0, -1);
+        }
         let bridge = null;
 
         const statusLabel = document.getElementById('status');
