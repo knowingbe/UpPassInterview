@@ -39,8 +39,11 @@ def decrypt_ingress_payload(payload: SubmissionPayload) -> str:
         decrypted_bytes = aesgcm.decrypt(iv, ciphertext, None)
         return decrypted_bytes.decode('utf-8')
     except Exception as e:
-        # Log error in production
-        raise ValueError(f"Decryption failed: {str(e)}")
+        # Internal logging for debugging (will show in Render logs)
+        print(f"DEBUG: Decryption Error Detail: {type(e).__name__} - {str(e)}")
+        
+        # User-facing error message (cleaner)
+        raise ValueError("Decryption failed. Please refresh the frontend to ensure you have the latest public key.")
 
 def encrypt_for_storage(data: str) -> str:
     """

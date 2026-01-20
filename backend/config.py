@@ -15,9 +15,11 @@ load_dotenv()
 _private_key_pem = os.getenv("SERVER_PRIVATE_KEY_PEM")
 
 if _private_key_pem:
-    # Handle both raw PEM and Base64 encoded PEM (common in some platforms)
     try:
+        # Handle literal "\n" strings that might be in the environment variable
+        _private_key_pem = _private_key_pem.replace("\\n", "\n")
         key_bytes = _private_key_pem.encode()
+        
         if not key_bytes.startswith(b"-----"):
             key_bytes = base64.b64decode(_private_key_pem)
         
@@ -26,7 +28,7 @@ if _private_key_pem:
             password=None
         )
     except Exception as e:
-        print(f"Error loading SERVER_PRIVATE_KEY_PEM: {e}")
+        print(f"CRITICAL: Error loading SERVER_PRIVATE_KEY_PEM: {e}")
         raise e
 else:
     # Fallback for local dev ONLY if not provided
