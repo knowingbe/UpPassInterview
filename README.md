@@ -21,13 +21,13 @@ npm run build
 ```
 
 ### 2. Backend Service
-1. Đảm bảo bạn đang đứng ở thư mục gốc `UpPassInterview`.
-2. Cài đặt thư viện: `py -m pip install -r backend/requirements.txt`
-3. Chạy backend:
+1. Ensure you are in the root directory `UpPassInterview`.
+2. Install dependencies: `py -m pip install -r backend/requirements.txt`
+3. Run backend:
    ```bash
    py -m uvicorn backend.main:app --reload
    ```
-   (Backend sẽ chạy tại http://127.0.0.1:8000)
+   (Backend will run at http://127.0.0.1:8000)
 
 ### 3. Interactive Demo
 1. Build the library: `cd frontend-lib && npm install && npm run build`
