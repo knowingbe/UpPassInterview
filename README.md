@@ -2,9 +2,14 @@
 
 This project demonstrates an End-to-End (E2E) encryption system for securely transmitting PII.
 
+# Project Demo:
+- `backend`: https://uppassinterview.onrender.com/docs/ 
+- `frontend demo`: https://uppassinterview.netlify.app/
+
 ## Structure
 - `/frontend-lib`: TypeScript library for client-side encryption.
 - `/backend`: Python FastAPI service for decryption and verification.
+- `/demo`: Interactive demo application.
 
 ## Prerequisites
 - Node.js & npm
